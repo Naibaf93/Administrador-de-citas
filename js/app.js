@@ -35,4 +35,10 @@ function datosCita(e) {
 
 function submitCita(e) {
     e.preventDefault();
+
+    const { paciente } = citaObj
+    if( paciente === '') {
+        console.log('paciente esta vacio');
+    }
+    console.log('despues del if');
 }

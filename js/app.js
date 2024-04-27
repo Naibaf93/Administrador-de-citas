@@ -135,5 +135,25 @@ function submitCita(e) {
         return
     }
 
-    citas.agregar(citaObj)
+    citas.agregar(citaObj);
+    formulario.reset();
+    reiniciarObjetoCita();
+}
+
+function reiniciarObjetoCita() {
+    // Reinciar el objeto
+ /* citaObj.paciente = '';
+    citaObj.propietario = '';
+    citaObj.email = '';
+    citaObj.fecha = '';
+    citaObj.sintomas = ''; 
+*/
+    Object.assign(citaObj, { 
+        paciente : '',
+        propietario : '',
+        email : '',
+        fecha : '',
+        sintomas : '' 
+    })
+
 }

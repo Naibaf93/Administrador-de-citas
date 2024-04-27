@@ -135,9 +135,13 @@ function submitCita(e) {
         return
     }
 
-    citas.agregar(citaObj);
+    citas.agregar({...citaObj});
     formulario.reset();
     reiniciarObjetoCita();
+    new Notificacion({
+        texto: 'Paciente Registrado',
+        tipo: 'exito'
+    })
 }
 
 function reiniciarObjetoCita() {
@@ -155,5 +159,4 @@ function reiniciarObjetoCita() {
         fecha : '',
         sintomas : '' 
     })
-
 }

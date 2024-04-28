@@ -7,7 +7,6 @@ const fechaInput = document.querySelector('#fecha');
 const sintomasInput = document.querySelector('#sintomas');
 
 const formulario = document.querySelector('#formulario-cita');
-
 const contenedorCitas = document.querySelector('#citas');
 
 // Eventos
@@ -19,6 +18,8 @@ fechaInput.addEventListener('change', datosCita)
 sintomasInput.addEventListener('change', datosCita) 
 
 formulario.addEventListener('submit', submitCita)
+
+let editando = false;
 
 // Objeto de cita
 
@@ -153,13 +154,17 @@ function submitCita(e) {
         return
     }
 
-    citas.agregar({...citaObj});
+    if(editando) {
+        console.log('editando registro');
+    } else {
+        citas.agregar({...citaObj});
+        new Notificacion({
+            texto: 'Paciente Registrado',
+            tipo: 'exito'
+        })
+    }
     formulario.reset();
-    reiniciarObjetoCita();
-    new Notificacion({
-        texto: 'Paciente Registrado',
-        tipo: 'exito'
-    })
+    reiniciarObjetoCita();   
 }
 
 function reiniciarObjetoCita() {
@@ -187,5 +192,13 @@ function generarId() {
 }
 
 function cargarEdicion(cita) {
-    console.log(cita);
+    Object.assign(citaObj, cita)
+
+    pacienteInput.value = cita.paciente;
+    propietarioInput.value = cita.propietario;
+    emailInput.value = cita.email;
+    fechaInput.value = cita.fecha;
+    sintomasInput.value = cita.sintomas;
+
+    editando = true;
 }
